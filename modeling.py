@@ -316,6 +316,35 @@ def rel_multihead_attn(h, r, r_w_bias, r_r_bias, seg_mat, r_s_bias, seg_embed,
   return output
 
 
+"""
+    week13 作业：
+    双流注意力实现函数
+    h: 
+    g: 
+    r: 
+    mens: 一个类型为float32的张量列表，用于记忆上一批次，列表长度等于层数。
+          若为空则不启用记忆功能。
+    r_w_bias: 
+    r_r_bias: 
+    seg_mat: 
+    r_s_bias:  
+    seg_embed:  
+    attn_mask_h: 隐藏的内容表述
+    attn_mask_g: 隐藏的查询表述
+    target_mapping: float32 Tensor in shape [num_predict, len, bsz].
+      If target_mapping[i, j, k] = 1, the i-th predict in batch k is
+      on the j-th token.
+      Only used during pretraining for partial prediction.
+      Set to None during finetuning.
+    d_model: int, the hidden size.
+    n_head: int, the number of attention heads.
+    d_head: int, the dimension size of each attention head.
+    dropout: float, dropout rate.
+    dropatt: float, dropout rate on attention probabilities.
+    is_training: bool, whether in training mode.
+    kernel_initializer: A tf initializer
+    scope: scope name for the computation graph.
+"""
 def two_stream_rel_attn(h, g, r, mems, r_w_bias, r_r_bias, seg_mat, r_s_bias,
                         seg_embed, attn_mask_h, attn_mask_g, target_mapping,
                         d_model, n_head, d_head, dropout, dropatt, is_training,
